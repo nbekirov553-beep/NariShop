@@ -1,0 +1,325 @@
+{
+  "meta": {
+    "title": "NariShop: elektronika va maishiy texnika",
+    "description": "Smartfonlar, noutbuklar, televizorlar va uy uchun texnika, O‘zbekiston bo‘ylab yetkazib berish bilan."
+  },
+  "demo": {
+    "banner": "Do‘konning demo versiyasi: mahsulotlar, narxlar va qoldiqlar haqiqiy emas."
+  },
+  "nav": {
+    "skipToContent": "Asosiy qismga o‘tish",
+    "home": "Bosh sahifa",
+    "catalog": "Katalog",
+    "cart": "Savat",
+    "cartWithCount": "Savat, mahsulotlar: {count}",
+    "menu": "Menyu",
+    "openMenu": "Menyuni ochish",
+    "close": "Yopish",
+    "search": "Do‘kon bo‘yicha qidiruv",
+    "searchShort": "Mahsulot qidirish",
+    "searchSubmit": "Qidirish",
+    "language": "Til",
+    "categories": "Kategoriyalar",
+    "main": "Asosiy navigatsiya",
+    "shop": "Do‘kon",
+    "collections": "Kolleksiyalar",
+    "about": "Biz haqimizda"
+  },
+  "theme": {
+    "label": "Mavzu",
+    "light": "Yorug‘",
+    "dark": "Qorong‘i",
+    "system": "Tizim bo‘yicha"
+  },
+  "footer": {
+    "about": "O‘zbekistondagi elektronika va maishiy texnika internet-do‘koni.",
+    "buyers": "Xaridorlarga",
+    "catalog": "Katalog",
+    "rights": "NariShop. Barcha huquqlar himoyalangan."
+  },
+  "home": {
+    "heroEyebrow": "Yangi sevimli narsalaringiz",
+    "heroHighlight": "Xaridlar",
+    "heroRest": "yangicha.",
+    "heroText": "Har kuningizni alohida qiladigan narsalarni toping.",
+    "heroCta": "Kolleksiyani ko‘rish",
+    "heroSpotlight": "Kadrda",
+    "tags": [
+      "Albatta oling!",
+      "Yangilik",
+      "Juda yoqdi!",
+      "Trendda ↗",
+      "Yangi sevimlingiz",
+      "Muharrir tanlovi",
+      "Ideal tanlov",
+      "Cheklangan kolleksiya"
+    ],
+    "featuredEyebrow": "Saralangan",
+    "featuredTitle": "Kichik narsalar. Katta hislar.",
+    "featuredText": "O‘zingizga olib qolgingiz keladigan topilmalar.",
+    "collectionsTitle": "Kolleksiyalar",
+    "collectionsText": "Texnikaning olti olami: cho‘ntakdagidan uydagigacha.",
+    "dealsTitle": "Hafta chegirmalari",
+    "showAll": "Barchasini ko‘rish",
+    "deliveryTitle": "Yetkazib berish va olib ketish",
+    "deliveryText": "Muddat va narx shaharga bog‘liq.",
+    "warrantyTitle": "Har bir mahsulotga kafolat",
+    "warrantyText": "Muddat mahsulot sahifasida ko‘rsatilgan.",
+    "paymentTitle": "Qabul qilganda to‘lov",
+    "paymentText": "Naqd yoki kuryerga karta orqali.",
+    "faqTitle": "Ko‘p beriladigan savollar",
+    "faq": [
+      {
+        "q": "Buyurtmani qanday rasmiylashtiraman?",
+        "a": "Mahsulotlarni savatga qo‘shing, kontaktlar va olish usulini kiriting. Menejer buyurtmani tasdiqlash uchun qo‘ng‘iroq qiladi."
+      },
+      {
+        "q": "Onlayn to‘lash mumkinmi?",
+        "a": "Hozircha qabul qilganda naqd yoki karta orqali to‘lash mumkin. Onlayn to‘lov keyinroq qo‘shiladi."
+      },
+      {
+        "q": "Mahsulot to‘g‘ri kelmasa nima qilaman?",
+        "a": "Qaytarish shartlari «Qaytarish» sahifasida. Chek va qadoqni saqlang."
+      },
+      {
+        "q": "Qayerlarga yetkazib berasiz?",
+        "a": "Shaharlar ro‘yxati va muddatlar «Yetkazib berish» sahifasida."
+      }
+    ]
+  },
+  "catalog": {
+    "title": "Katalog",
+    "searchTitle": "Qidiruv: «{q}»",
+    "products": {
+      "one": "{count} ta mahsulot",
+      "few": "{count} ta mahsulot",
+      "many": "{count} ta mahsulot",
+      "other": "{count} ta mahsulot"
+    },
+    "filters": "Filtrlar",
+    "resetFilters": "Filtrlarni tozalash",
+    "showResults": "Ko‘rsatish",
+    "category": "Kategoriya",
+    "allCategories": "Barcha kategoriyalar",
+    "brand": "Brend",
+    "price": "Narx, so‘m",
+    "priceFrom": "dan",
+    "priceTo": "gacha",
+    "applyPrice": "Narxni qo‘llash",
+    "inStock": "Faqat mavjudlari",
+    "sort": "Saralash",
+    "sortOptions": {
+      "popular": "Avval ommaboplari",
+      "price-asc": "Avval arzonlari",
+      "price-desc": "Avval qimmatlari",
+      "new": "Avval yangilari"
+    },
+    "emptyTitle": "Hech narsa topilmadi",
+    "emptyText": "Ko‘proq mahsulot ko‘rish uchun so‘rovni o‘zgartiring yoki filtrlarni tozalang.",
+    "prev": "Orqaga",
+    "next": "Oldinga",
+    "pageOf": "{count} dan {page}-sahifa",
+    "pagination": "Katalog sahifalari"
+  },
+  "product": {
+    "sku": "Artikul",
+    "inStock": "Mavjud",
+    "lowStock": "{count} dona qoldi",
+    "outOfStock": "Mavjud emas",
+    "addToCart": "Savatga",
+    "added": "Mahsulot savatda",
+    "goToCart": "Savatga o‘tish",
+    "quantity": "Miqdor",
+    "decrease": "Miqdorni kamaytirish",
+    "increase": "Miqdorni oshirish",
+    "warranty": "Kafolat {months} oy",
+    "deliveryShort": "Yetkazib berish yoki olib ketishni menejer aniqlaydi",
+    "description": "Tavsif",
+    "specs": "Xususiyatlar",
+    "similar": "O‘xshash mahsulotlar",
+    "oldPrice": "Eski narx",
+    "discount": "{percent}% chegirma",
+    "demoNotice": "Bu demo mahsulot: narx va xususiyatlar o‘ylab topilgan, surat namuna sifatida berilgan.",
+    "imagePlaceholder": "Mahsulot surati keyinroq qo‘shiladi",
+    "faqTitle": "Xarid haqida savollar",
+    "faq": [
+      {
+        "q": "Kafolat qanday ishlaydi?",
+        "a": "Kafolat muddati narx yonida ko‘rsatilgan. Batafsil «Kafolat» sahifasida."
+      },
+      {
+        "q": "Buyurtma qachon yetib keladi?",
+        "a": "Menejer buyurtmani tasdiqlashda muddatni aytadi."
+      },
+      {
+        "q": "Buyurtmani o‘zgartirsa bo‘ladimi?",
+        "a": "Ha, tasdiqlash uchun qo‘ng‘iroq qilganda menejerga ayting."
+      }
+    ]
+  },
+  "specs": {
+    "groups": {
+      "display": "Ekran",
+      "performance": "Unumdorlik",
+      "memory": "Xotira",
+      "battery": "Quvvat",
+      "camera": "Kamera",
+      "sound": "Ovoz",
+      "connectivity": "Ulanish",
+      "general": "Umumiy"
+    },
+    "keys": {
+      "screenSize": "Diagonal",
+      "screenType": "Ekran turi",
+      "resolution": "Ruxsat",
+      "refreshRate": "Yangilanish chastotasi",
+      "processor": "Protsessor",
+      "ram": "Operativ xotira",
+      "storage": "Doimiy xotira",
+      "battery": "Akkumulyator",
+      "playtime": "Ishlash vaqti",
+      "mainCamera": "Asosiy kamera",
+      "os": "Operatsion tizim",
+      "weight": "Og‘irlik",
+      "noiseCancelling": "Shovqinni bostirish",
+      "bluetooth": "Bluetooth",
+      "wifi": "Wi-Fi",
+      "capacity": "Hajm",
+      "energyClass": "Energiya sinfi",
+      "power": "Quvvat",
+      "smartTv": "Smart TV"
+    }
+  },
+  "cart": {
+    "title": "Savat",
+    "emptyTitle": "Savat hozircha bo‘sh",
+    "emptyText": "Katalogga qarang: u yerda smartfonlar, noutbuklar va uy texnikasi bor.",
+    "remove": "O‘chirish",
+    "removeItem": "{name} ni savatdan o‘chirish",
+    "summary": "Buyurtmangiz",
+    "items": {
+      "one": "{count} ta mahsulot",
+      "few": "{count} ta mahsulot",
+      "many": "{count} ta mahsulot",
+      "other": "{count} ta mahsulot"
+    },
+    "subtotal": "Mahsulotlar",
+    "delivery": "Yetkazib berish",
+    "deliveryValue": "Menejer aniqlaydi",
+    "total": "Jami",
+    "checkout": "Buyurtma berish",
+    "continueShopping": "Xaridni davom ettirish",
+    "loadError": "Narxlarni yangilab bo‘lmadi. Internetni tekshirib, qayta urinib ko‘ring.",
+    "retry": "Qayta urinish",
+    "outOfStock": "Mahsulot tugagan. Buyurtma berish uchun uni o‘chiring.",
+    "quantityReduced": "Faqat {count} dona mavjud, miqdor kamaytirildi.",
+    "missingRemoved": "Ba’zi mahsulotlar endi sotilmaydi va savatdan olib tashlandi."
+  },
+  "checkout": {
+    "title": "Buyurtmani rasmiylashtirish",
+    "contact": "Kontaktlar",
+    "name": "Ism va familiya",
+    "phone": "Telefon",
+    "phoneHint": "Format: +998 90 123 45 67",
+    "email": "Email",
+    "emailHint": "Majburiy emas. Buyurtma nusxasini yuboramiz.",
+    "delivery": "Olish usuli",
+    "courier": "Kuryer orqali yetkazish",
+    "pickup": "Olib ketish",
+    "pickupNote": "Olib ketish manzilini menejer tasdiqlashda aytadi.",
+    "city": "Shahar",
+    "address": "Manzil",
+    "addressHint": "Ko‘cha, uy, xonadon",
+    "payment": "To‘lov",
+    "cash": "Qabul qilganda naqd",
+    "card_on_delivery": "Qabul qilganda karta orqali",
+    "paymentNote": "Onlayn to‘lov keyinroq qo‘shiladi.",
+    "comment": "Buyurtmaga izoh",
+    "commentHint": "Masalan, qo‘ng‘iroq uchun qulay vaqt",
+    "submit": "Buyurtmani tasdiqlash",
+    "submitting": "Buyurtma yuborilmoqda",
+    "backToCart": "Savatga qaytish",
+    "errorSummary": "Belgilangan maydonlarni tekshiring.",
+    "errors": {
+      "nameRequired": "Ismni kiriting: kamida 2 ta belgi.",
+      "nameTooLong": "Ism juda uzun.",
+      "phoneInvalid": "Raqamni +998 va 9 ta raqam ko‘rinishida kiriting.",
+      "emailInvalid": "Email manzilini tekshiring.",
+      "deliveryRequired": "Olish usulini tanlang.",
+      "paymentRequired": "To‘lov usulini tanlang.",
+      "cityRequired": "Yetkazib berish shahrini kiriting.",
+      "addressRequired": "Yetkazib berish manzilini kiriting.",
+      "commentTooLong": "Izoh 500 belgidan uzun.",
+      "stock_changed": "Mahsulotlar mavjudligi o‘zgardi. Savatni tekshirib, buyurtmani qayta yuboring.",
+      "empty_cart": "Savat bo‘sh. Buyurtma berish uchun mahsulot qo‘shing.",
+      "network": "Server bilan aloqa yo‘q. Internetni tekshirib, «Buyurtmani tasdiqlash» tugmasini yana bosing.",
+      "generic": "Buyurtma yuborilmadi. Bir daqiqadan keyin qayta urinib ko‘ring."
+    },
+    "successTitle": "Buyurtma qabul qilindi",
+    "successText": "Buyurtma raqami {number}. Menejer tarkib va yetkazib berishni tasdiqlash uchun qo‘ng‘iroq qiladi.",
+    "successDemo": "Bu demo buyurtma: uni hech kim qayta ishlamaydi.",
+    "toCatalog": "Katalogga qaytish"
+  },
+  "info": {
+    "draft": "Qoralama. Matnni ommaviy ishga tushirishdan oldin do‘kon egasi tasdiqlashi kerak.",
+    "pages": {
+      "delivery": {
+        "title": "Yetkazib berish",
+        "body": [
+          "Buyurtmalarni kuryer orqali yetkazamiz, olib ketish ham mumkin.",
+          "Shaharlar, muddatlar va narxlar shartlar tasdiqlangandan keyin e’lon qilinadi.",
+          "Buyurtmadan keyin menejer yetkazib berish muddatini telefon orqali tasdiqlaydi."
+        ]
+      },
+      "payment": {
+        "title": "To‘lov",
+        "body": [
+          "Hozir qabul qilganda naqd yoki bank kartasi orqali to‘lash mumkin.",
+          "Narx menejer buyurtmani tasdiqlagan paytda qat’iylashadi.",
+          "Onlayn to‘lov to‘lov provayderi tekshirilgandan keyin qo‘shiladi."
+        ]
+      },
+      "warranty": {
+        "title": "Kafolat",
+        "body": [
+          "Har bir mahsulotga kafolat bor, muddati mahsulot sahifasida ko‘rsatilgan.",
+          "Kafolat bo‘yicha murojaat uchun chek va kafolat talonini saqlang.",
+          "Servis markazlari manzillari tasdiqlangandan keyin e’lon qilinadi."
+        ]
+      },
+      "returns": {
+        "title": "Qaytarish va almashtirish",
+        "body": [
+          "Mahsulotni O‘zbekiston Respublikasi qonunchiligiga muvofiq qaytarish yoki almashtirish mumkin.",
+          "Mahsulot tashqi ko‘rinishi, qadog‘i va to‘liq to‘plamini saqlashi kerak.",
+          "Qaytarishning aniq tartibi va muddatlari tasdiqlangandan keyin e’lon qilinadi."
+        ]
+      },
+      "contacts": {
+        "title": "Kontaktlar",
+        "body": [
+          "Telefon, manzil va ish vaqti do‘kon egasi tasdiqlagandan keyin paydo bo‘ladi.",
+          "Hozircha buyurtma bo‘yicha menejer siz ko‘rsatgan telefon orqali bog‘lanadi."
+        ]
+      },
+      "privacy": {
+        "title": "Maxfiylik",
+        "body": [
+          "Ism, telefon va manzilingizdan faqat buyurtmani qayta ishlash va yetkazish uchun foydalanamiz.",
+          "Bank kartasi ma’lumotlarini saqlamaymiz.",
+          "To‘liq maxfiylik siyosati yuridik tekshiruvdan keyin e’lon qilinadi."
+        ]
+      }
+    }
+  },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "text": "Havola eskirgan yoki mahsulot sotuvdan olingan bo‘lishi mumkin.",
+    "cta": "Bosh sahifaga"
+  },
+  "error": {
+    "title": "Sahifa yuklanmadi",
+    "text": "Serverda xatolik yuz berdi. Sahifani yangilab ko‘ring.",
+    "retry": "Yangilash"
+  }
+}

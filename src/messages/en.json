@@ -1,0 +1,325 @@
+{
+  "meta": {
+    "title": "NariShop: electronics and home appliances",
+    "description": "Smartphones, laptops, TVs and home appliances with delivery across Uzbekistan."
+  },
+  "demo": {
+    "banner": "Demo store: products, prices and stock are not real."
+  },
+  "nav": {
+    "skipToContent": "Skip to content",
+    "home": "Home",
+    "catalog": "Catalog",
+    "cart": "Cart",
+    "cartWithCount": "Cart, items: {count}",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "close": "Close",
+    "search": "Search the store",
+    "searchShort": "Search products",
+    "searchSubmit": "Search",
+    "language": "Language",
+    "categories": "Categories",
+    "main": "Main navigation",
+    "shop": "Shop",
+    "collections": "Collections",
+    "about": "About"
+  },
+  "theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "footer": {
+    "about": "Online store for electronics and home appliances in Uzbekistan.",
+    "buyers": "For customers",
+    "catalog": "Catalog",
+    "rights": "NariShop. All rights reserved."
+  },
+  "home": {
+    "heroEyebrow": "Your new favourite things",
+    "heroHighlight": "Shopping,",
+    "heroRest": "reimagined.",
+    "heroText": "Find things that make every day a little special.",
+    "heroCta": "Explore the collection",
+    "heroSpotlight": "In the shot",
+    "tags": [
+      "Must have!",
+      "New in",
+      "Love it!",
+      "Trending ↗",
+      "Your new favourite",
+      "Editor’s pick",
+      "Perfect choice",
+      "Limited edition"
+    ],
+    "featuredEyebrow": "Curated",
+    "featuredTitle": "Little things. Big feelings.",
+    "featuredText": "Finds you’ll want to keep for yourself.",
+    "collectionsTitle": "Collections",
+    "collectionsText": "Six worlds of tech, from pocket-sized to home-sized.",
+    "dealsTitle": "Deals of the week",
+    "showAll": "See all",
+    "deliveryTitle": "Delivery and pickup",
+    "deliveryText": "Time and cost depend on the city.",
+    "warrantyTitle": "Warranty on every item",
+    "warrantyText": "The term is listed on each product page.",
+    "paymentTitle": "Pay on delivery",
+    "paymentText": "In cash or by card to the courier.",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "How do I place an order?",
+        "a": "Add items to the cart, enter your contact details and how you want to receive the order. A manager will call to confirm it."
+      },
+      {
+        "q": "Can I pay online?",
+        "a": "For now you can pay on delivery in cash or by card. Online payment will be added later."
+      },
+      {
+        "q": "What if the item doesn't suit me?",
+        "a": "Return terms are on the Returns page. Keep the receipt and packaging."
+      },
+      {
+        "q": "Where do you deliver?",
+        "a": "Cities and delivery times are listed on the Delivery page."
+      }
+    ]
+  },
+  "catalog": {
+    "title": "Catalog",
+    "searchTitle": "Search: “{q}”",
+    "products": {
+      "one": "{count} product",
+      "few": "{count} products",
+      "many": "{count} products",
+      "other": "{count} products"
+    },
+    "filters": "Filters",
+    "resetFilters": "Reset filters",
+    "showResults": "Show",
+    "category": "Category",
+    "allCategories": "All categories",
+    "brand": "Brand",
+    "price": "Price, UZS",
+    "priceFrom": "from",
+    "priceTo": "to",
+    "applyPrice": "Apply price",
+    "inStock": "In stock only",
+    "sort": "Sort by",
+    "sortOptions": {
+      "popular": "Most popular",
+      "price-asc": "Price: low to high",
+      "price-desc": "Price: high to low",
+      "new": "Newest first"
+    },
+    "emptyTitle": "Nothing found",
+    "emptyText": "Change the search or reset filters to see more products.",
+    "prev": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {count}",
+    "pagination": "Catalog pages"
+  },
+  "product": {
+    "sku": "SKU",
+    "inStock": "In stock",
+    "lowStock": "Only {count} left",
+    "outOfStock": "Out of stock",
+    "addToCart": "Add to cart",
+    "added": "Added to cart",
+    "goToCart": "Go to cart",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "warranty": "{months}-month warranty",
+    "deliveryShort": "A manager will confirm delivery or pickup",
+    "description": "Description",
+    "specs": "Specifications",
+    "similar": "Similar products",
+    "oldPrice": "Old price",
+    "discount": "{percent}% off",
+    "demoNotice": "Demo product: price and specifications are made up, the photo is illustrative.",
+    "imagePlaceholder": "Product photo coming soon",
+    "faqTitle": "Questions about buying",
+    "faq": [
+      {
+        "q": "How does the warranty work?",
+        "a": "The warranty term is shown next to the price. Details are on the Warranty page."
+      },
+      {
+        "q": "When will my order arrive?",
+        "a": "The manager will give you the date when confirming the order."
+      },
+      {
+        "q": "Can I change my order?",
+        "a": "Yes, tell the manager when they call to confirm it."
+      }
+    ]
+  },
+  "specs": {
+    "groups": {
+      "display": "Display",
+      "performance": "Performance",
+      "memory": "Memory",
+      "battery": "Power",
+      "camera": "Camera",
+      "sound": "Sound",
+      "connectivity": "Connectivity",
+      "general": "General"
+    },
+    "keys": {
+      "screenSize": "Screen size",
+      "screenType": "Screen type",
+      "resolution": "Resolution",
+      "refreshRate": "Refresh rate",
+      "processor": "Processor",
+      "ram": "RAM",
+      "storage": "Storage",
+      "battery": "Battery",
+      "playtime": "Playtime",
+      "mainCamera": "Main camera",
+      "os": "Operating system",
+      "weight": "Weight",
+      "noiseCancelling": "Noise cancelling",
+      "bluetooth": "Bluetooth",
+      "wifi": "Wi-Fi",
+      "capacity": "Capacity",
+      "energyClass": "Energy class",
+      "power": "Power",
+      "smartTv": "Smart TV"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "emptyTitle": "Your cart is empty",
+    "emptyText": "Browse the catalog for smartphones, laptops and home appliances.",
+    "remove": "Remove",
+    "removeItem": "Remove {name} from cart",
+    "summary": "Your order",
+    "items": {
+      "one": "{count} item",
+      "few": "{count} items",
+      "many": "{count} items",
+      "other": "{count} items"
+    },
+    "subtotal": "Items",
+    "delivery": "Delivery",
+    "deliveryValue": "Confirmed by manager",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continueShopping": "Continue shopping",
+    "loadError": "Prices could not be updated. Check your connection and try again.",
+    "retry": "Try again",
+    "outOfStock": "Out of stock. Remove it to place the order.",
+    "quantityReduced": "Only {count} available, quantity reduced.",
+    "missingRemoved": "Some items are no longer sold and were removed from the cart."
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contact": "Contact details",
+    "name": "Full name",
+    "phone": "Phone",
+    "phoneHint": "Format: +998 90 123 45 67",
+    "email": "Email",
+    "emailHint": "Optional. We will send a copy of the order.",
+    "delivery": "Delivery method",
+    "courier": "Courier delivery",
+    "pickup": "Pickup",
+    "pickupNote": "The manager will share the pickup address when confirming.",
+    "city": "City",
+    "address": "Address",
+    "addressHint": "Street, building, apartment",
+    "payment": "Payment",
+    "cash": "Cash on delivery",
+    "card_on_delivery": "Card on delivery",
+    "paymentNote": "Online payment will be available later.",
+    "comment": "Order comment",
+    "commentHint": "For example, a good time to call",
+    "submit": "Confirm order",
+    "submitting": "Sending order",
+    "backToCart": "Back to cart",
+    "errorSummary": "Check the highlighted fields.",
+    "errors": {
+      "nameRequired": "Enter a name of at least 2 characters.",
+      "nameTooLong": "The name is too long.",
+      "phoneInvalid": "Enter the number as +998 followed by 9 digits.",
+      "emailInvalid": "Check the email address.",
+      "deliveryRequired": "Choose a delivery method.",
+      "paymentRequired": "Choose a payment method.",
+      "cityRequired": "Enter the delivery city.",
+      "addressRequired": "Enter the delivery address.",
+      "commentTooLong": "The comment is longer than 500 characters.",
+      "stock_changed": "Stock has changed. Review your cart and submit the order again.",
+      "empty_cart": "Your cart is empty. Add items to place an order.",
+      "network": "No connection to the server. Check your internet and press “Confirm order” again.",
+      "generic": "The order was not sent. Try again in a minute."
+    },
+    "successTitle": "Order received",
+    "successText": "Order number {number}. A manager will call to confirm items and delivery.",
+    "successDemo": "This is a demo order: nobody will process it.",
+    "toCatalog": "Back to catalog"
+  },
+  "info": {
+    "draft": "Draft. The store owner must approve this text before public launch.",
+    "pages": {
+      "delivery": {
+        "title": "Delivery",
+        "body": [
+          "We deliver orders by courier and offer pickup.",
+          "Cities, delivery times and costs will be published once the terms are approved.",
+          "A manager confirms the delivery date by phone after you place the order."
+        ]
+      },
+      "payment": {
+        "title": "Payment",
+        "body": [
+          "Right now you can pay on delivery, in cash or by bank card.",
+          "The price is fixed when the manager confirms the order.",
+          "Online payment will be added after the payment provider is reviewed."
+        ]
+      },
+      "warranty": {
+        "title": "Warranty",
+        "body": [
+          "Every product has a warranty; the term is shown on the product page.",
+          "Keep the receipt and warranty card for warranty claims.",
+          "Service center addresses will be published once approved."
+        ]
+      },
+      "returns": {
+        "title": "Returns and exchange",
+        "body": [
+          "Products can be returned or exchanged under the laws of the Republic of Uzbekistan.",
+          "The product must keep its condition, packaging and accessories.",
+          "The exact return procedure and terms will be published once approved."
+        ]
+      },
+      "contacts": {
+        "title": "Contacts",
+        "body": [
+          "Phone, address and opening hours will appear once the store owner approves them.",
+          "For now, a manager will contact you about your order using the phone you provide."
+        ]
+      },
+      "privacy": {
+        "title": "Privacy",
+        "body": [
+          "We use your name, phone and address only to process and deliver your order.",
+          "We do not store bank card details.",
+          "The full privacy policy will be published after legal review."
+        ]
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The link may be outdated or the product is no longer sold.",
+    "cta": "Go to home page"
+  },
+  "error": {
+    "title": "The page didn't load",
+    "text": "A server error occurred. Try reloading the page.",
+    "retry": "Reload"
+  }
+}

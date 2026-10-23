@@ -1,0 +1,782 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+  Небесная тема. Страница — приглушённое небо, контент живёт в больших скруглённых
+  контейнерах (.sky-frame на главной, .sheet на остальных страницах).
+  Главное действие — чёрная капсула; пастели только в декоре, метках и фонах фото.
+  Скругления: интерактивные элементы — pill, карточки — 24px, поля — 14px, контейнеры — --radius-frame.
+*/
+:root {
+  color-scheme: light;
+  --sky: #a9d5e5;
+  --sky-cyan: #73bfd5;
+  --sky-deep: #4d9eb9;
+  --cloud: #f8fbfd;
+  --ink: #08090c;
+  --pastel-pink: #f8d7e2;
+  --pastel-lavender: #c9c9ff;
+  --pastel-butter: #fff0a6;
+  --pastel-peach: #ffd9c5;
+  /* Светлые оттенки пастели под фото товаров: снимок ложится на них через multiply. */
+  --tint-sky: #dceff6;
+  --tint-pink: #fbe6ed;
+  --tint-lavender: #e7e7ff;
+  --tint-butter: #fff6cc;
+  --tint-peach: #ffe8dc;
+
+  --bg: #a6cddd;
+  --surface: #f8fbfd;
+  --surface-muted: #e3eff5;
+  --text: #08090c;
+  --text-muted: #4a5561;
+  --border: #d3e4ec;
+  --accent: #08090c;
+  --accent-hover: #262b33;
+  --accent-contrast: #f8fbfd;
+  --accent-soft: #dceef5;
+  --price: #08090c;
+  /* Фон студийных фото товаров: одинаковый в обеих темах, чтобы край снимка не был виден. */
+  --photo: #eef1f5;
+  --photo-text: #111827;
+  --photo-muted: #4b5565;
+  --success: #15803d;
+  --success-soft: #dcf2e3;
+  --warning: #8a5300;
+  --warning-soft: #fbefd5;
+  --danger: #b42318;
+  --danger-soft: #fbe4e1;
+  --focus: #2b7f9c;
+  --backdrop: rgb(12 32 44 / 0.28);
+  /* Материалы (vibrancy): полупрозрачная основа + размытие и насыщение фона под ней. */
+  --material-thin: rgb(248 251 253 / 0.42);
+  --material-regular: rgb(248 251 253 / 0.66);
+  --material-thick: rgb(244 249 252 / 0.8);
+  --material-chrome: rgb(240 247 251 / 0.6);
+  --material-highlight: rgb(255 255 255 / 0.75);
+  --material-edge: rgb(8 9 12 / 0.07);
+  --material-saturate: 180%;
+  --fill: rgb(8 9 12 / 0.05);
+  --fill-hover: rgb(8 9 12 / 0.09);
+  --vibrant: color-mix(in srgb, var(--text) 68%, transparent);
+  --shadow: 0 1px 2px rgb(8 9 12 / 0.04), 0 10px 28px -14px rgb(31 86 110 / 0.28);
+  --shadow-lift: 0 2px 6px rgb(8 9 12 / 0.05), 0 24px 48px -20px rgb(31 86 110 / 0.42);
+
+  /* Небо главного экрана и подложка страницы. */
+  --frame-sky:
+    radial-gradient(60% 45% at 12% 18%, rgb(255 255 255 / 0.55), transparent 70%),
+    radial-gradient(45% 35% at 88% 14%, rgb(255 255 255 / 0.45), transparent 70%),
+    linear-gradient(180deg, #84b8e2 0%, #8ebee6 55%, #9fcbee 100%);
+  --frame-veil: transparent;
+  --hero-ink: #08090c;
+  --page-glow: radial-gradient(90% 60% at 50% 0%, rgb(255 255 255 / 0.28), transparent 70%);
+  --sheet-bg: rgb(248 251 253 / 0.86);
+  --sheet-top: rgb(214 236 245 / 0.9);
+
+  --frame-inset: 0.75rem;
+  --frame-max: 1480px;
+  --radius-frame: 28px;
+  /* Высота шапки: на главной небо уходит под неё, как на референсе. */
+  --header-h: 7.75rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (width >= 40rem) {
+  :root {
+    --frame-inset: 1.5rem;
+    --radius-frame: 36px;
+  }
+}
+
+@media (width >= 48rem) {
+  :root {
+    --header-h: 5rem;
+  }
+}
+
+@media (width >= 64rem) {
+  :root {
+    --frame-inset: 2.5rem;
+    --radius-frame: 44px;
+  }
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #18303f;
+  --surface: #1b3040;
+  --surface-muted: #243b4c;
+  --text: #eef5f9;
+  --text-muted: #a9bac6;
+  --border: #2d4659;
+  --accent: #f8fbfd;
+  --accent-hover: #d6e6ee;
+  --accent-contrast: #08090c;
+  --accent-soft: #183241;
+  --price: #f8fbfd;
+  --frame-veil: linear-gradient(180deg, rgb(10 24 36 / 0.58), rgb(10 24 36 / 0.26) 60%, rgb(10 24 36 / 0.1));
+  --hero-ink: #f8fbfd;
+  --page-glow: radial-gradient(90% 60% at 50% 0%, rgb(115 191 213 / 0.26), transparent 70%);
+  --sheet-bg: rgb(27 48 64 / 0.88);
+  --sheet-top: rgb(34 70 90 / 0.9);
+  --success: #4ade80;
+  --success-soft: #12301d;
+  --warning: #f6c25b;
+  --warning-soft: #33280f;
+  --danger: #ff8a7a;
+  --danger-soft: #3a1714;
+  --focus: #93b4ff;
+  --backdrop: rgb(2 6 16 / 0.5);
+  --material-thin: rgb(18 25 38 / 0.45);
+  --material-regular: rgb(18 25 38 / 0.62);
+  --material-thick: rgb(16 22 34 / 0.72);
+  --material-chrome: rgb(10 14 22 / 0.6);
+  --material-highlight: rgb(255 255 255 / 0.07);
+  --material-edge: rgb(255 255 255 / 0.08);
+  --material-saturate: 160%;
+  --fill: rgb(255 255 255 / 0.07);
+  --fill-hover: rgb(255 255 255 / 0.12);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 30px -14px rgb(0 0 0 / 0.6);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 22px 44px -18px rgb(0 0 0 / 0.75);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-accent-soft: var(--accent-soft);
+  --color-price: var(--price);
+  --color-sky: var(--sky);
+  --color-sky-cyan: var(--sky-cyan);
+  --color-sky-deep: var(--sky-deep);
+  --color-cloud: var(--cloud);
+  --color-ink: var(--ink);
+  --color-hero-ink: var(--hero-ink);
+  --color-pastel-pink: var(--pastel-pink);
+  --color-pastel-lavender: var(--pastel-lavender);
+  --color-pastel-butter: var(--pastel-butter);
+  --color-pastel-peach: var(--pastel-peach);
+  --color-tint-sky: var(--tint-sky);
+  --color-tint-pink: var(--tint-pink);
+  --color-tint-lavender: var(--tint-lavender);
+  --color-tint-butter: var(--tint-butter);
+  --color-tint-peach: var(--tint-peach);
+  --color-photo: var(--photo);
+  --color-photo-text: var(--photo-text);
+  --color-photo-muted: var(--photo-muted);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-focus: var(--focus);
+  --color-fill: var(--fill);
+  --color-fill-hover: var(--fill-hover);
+  --color-vibrant: var(--vibrant);
+  --color-material-edge: var(--material-edge);
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-field: 14px;
+  --radius-card: 24px;
+  --radius-pill: 999px;
+
+  --shadow-card: var(--shadow);
+  --shadow-lift: var(--shadow-lift);
+}
+
+@layer base {
+  html {
+    background: var(--page-glow) no-repeat, var(--bg);
+    color: var(--text);
+    -webkit-text-size-adjust: 100%;
+    interpolate-size: allow-keywords;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+  }
+
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/*
+  Visual Effect Material (vibrancy). Веб-приближение материалов Apple: официального CSS нет,
+  эффект собран из backdrop-filter, полупрозрачной основы и светлой кромки.
+  Применять только к поверхностям, под которыми прокручивается или лежит контент.
+*/
+@layer components {
+  .material {
+    background-color: var(--material-bg);
+    -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
+    backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
+    box-shadow: inset 0 1px 0 var(--material-highlight);
+  }
+
+  .material-thin {
+    --material-bg: var(--material-thin);
+    --material-blur: 12px;
+  }
+
+  .material-regular {
+    --material-bg: var(--material-regular);
+    --material-blur: 20px;
+  }
+
+  .material-thick {
+    --material-bg: var(--material-thick);
+    --material-blur: 32px;
+  }
+
+  .material-chrome {
+    --material-bg: var(--material-chrome);
+    --material-blur: 24px;
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .material {
+      background-color: var(--surface);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .material {
+      background-color: var(--surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  /* Большой скруглённый контейнер страницы: стекло поверх небесной подложки. */
+  .sheet {
+    width: calc(100% - 2 * var(--frame-inset));
+    max-width: var(--frame-max);
+    margin-inline: auto;
+    padding: clamp(1.25rem, 3.2vw, 3rem) clamp(1rem, 3vw, 2.75rem);
+    border-radius: var(--radius-frame);
+    background: var(--sheet-bg);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    backdrop-filter: blur(24px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 var(--material-highlight),
+      0 30px 80px -40px rgb(20 70 95 / 0.45);
+  }
+
+  main > .sheet:first-child {
+    margin-top: 0.75rem;
+  }
+
+  /* Верх контейнера подхватывает цвет неба: мягкий переход от главного экрана к каталогу. */
+  .sheet-sky {
+    background: linear-gradient(180deg, var(--sheet-top) 0, var(--sheet-bg) 32rem);
+  }
+
+  /* Небо главного экрана: градиент + мягкие «облака»; фото товара ложится сверху. */
+  .sky-frame {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    width: calc(100% - 2 * var(--frame-inset));
+    max-width: var(--frame-max);
+    margin-inline: auto;
+    border-radius: var(--radius-frame);
+    background: var(--frame-sky);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.5),
+      0 40px 90px -40px rgb(20 70 95 / 0.55);
+  }
+
+  /*
+    Главный экран: небо уходит под шапку, высота — почти весь экран.
+    Размеры фото считаются в единицах контейнера (cqw/cqh): наушники занимают нижние
+    57.5% снимка (0.575 × 9/16 = 0.3234 ширины), поэтому ширина подбирается так,
+    чтобы они целиком встали между заголовком (--hp-top) и карточкой «В кадре» (--hp-lift).
+  */
+  .hero-frame {
+    container-type: size;
+    height: max(44rem, calc(100svh - 3rem));
+    margin-top: calc(-1 * var(--header-h));
+  }
+
+  .hero-photo {
+    --hp-top: 0.58;
+    --hp-lift: 4.75rem;
+    --hp-max: 257cqw;
+    position: absolute;
+    left: 50%;
+    translate: -50% 0;
+    aspect-ratio: 16 / 9;
+    width: min(var(--hp-max), calc((100cqh * (1 - var(--hp-top)) - var(--hp-lift)) / 0.3234));
+    bottom: var(--hp-lift);
+    transform-origin: 50% 85%;
+  }
+
+  @media (width >= 48rem) {
+    .hero-frame {
+      height: clamp(42rem, calc(100svh - 3.5rem), 60rem);
+    }
+
+    .hero-photo {
+      --hp-top: 0.5;
+      --hp-lift: 4.5rem;
+      --hp-max: 164cqw;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .hero-photo {
+      --hp-top: 0.47;
+      --hp-lift: 4.25rem;
+      --hp-max: 120cqw;
+    }
+  }
+
+  /* Наушники парят; маска растворяет обрезанные края снимка в небе контейнера. */
+  .hero-levitate {
+    position: absolute;
+    inset: 0;
+    mask-image:
+      linear-gradient(to bottom, transparent, #000 28%, #000 90%, transparent),
+      linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-composite: intersect;
+    animation: levitate 6s ease-in-out infinite alternate;
+  }
+
+  /* «Звуковые волны» от наушников. Центр и размер — в долях снимка. */
+  .hero-ring {
+    position: absolute;
+    left: 49.5%;
+    top: 71%;
+    width: 34%;
+    aspect-ratio: 1;
+    border: 2px solid rgb(255 255 255 / 0.7);
+    border-radius: 50%;
+    translate: -50% -50%;
+    opacity: 0;
+    animation: sound-wave 4.8s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+    animation-delay: calc(var(--i, 0) * 1.6s);
+  }
+
+  /* Слой, который смещается за курсором: --px/--py ставит HeroStage, --depth — глубина слоя. */
+  .parallax {
+    transform: translate3d(calc(var(--px, 0) * var(--depth, 0px)), calc(var(--py, 0) * var(--depth, 0px)), 0);
+    transition: transform 0.9s var(--ease-out);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .hero-photo {
+      animation: hero-zoom linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100svh;
+    }
+
+    .hero-copy {
+      animation: hero-copy-out linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 55svh;
+    }
+  }
+
+  /* Призрак товара, летящий в корзину (см. lib/fly-to-cart.ts). */
+  .fly-ghost {
+    position: fixed;
+    z-index: 200;
+    pointer-events: none;
+    border-radius: 999px;
+    object-fit: cover;
+    background: var(--photo);
+    box-shadow: var(--shadow-lift);
+  }
+
+  span.fly-ghost {
+    background: var(--accent);
+  }
+
+  .sky-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: var(--frame-veil);
+  }
+
+  /* Шапка прозрачна над небом и уплотняется в стекло при прокрутке. */
+  .header-bar {
+    background-color: var(--material-regular);
+    -webkit-backdrop-filter: blur(20px) saturate(var(--material-saturate));
+    backdrop-filter: blur(20px) saturate(var(--material-saturate));
+    box-shadow:
+      inset 0 1px 0 var(--material-highlight),
+      0 12px 32px -20px rgb(20 70 95 / 0.45);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .header-bar {
+      animation: header-solidify linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 140px;
+    }
+  }
+
+  /* Слово-капсула в заголовке, как выделение на референсе. */
+  .word-capsule {
+    display: inline-block;
+    padding: 0 0.22em 0.04em;
+    border-radius: 0.3em;
+    background: var(--sky-deep);
+    color: var(--cloud);
+    box-shadow: inset 0 -0.06em 0 rgb(8 9 12 / 0.12);
+  }
+
+  /* Плавающие пастельные капсулы вокруг товара. */
+  .float-tag {
+    animation: float-tag var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate;
+  }
+
+  .tag-pill {
+    rotate: var(--r, 0deg);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.7),
+      0 10px 24px -12px rgb(20 60 80 / 0.45);
+  }
+}
+
+@keyframes header-solidify {
+  from {
+    background-color: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@keyframes float-tag {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: var(--dx, 0px) var(--dy, -12px);
+  }
+}
+
+@keyframes levitate {
+  from {
+    translate: 0 0;
+    rotate: -0.6deg;
+  }
+  to {
+    translate: 0 -1.4%;
+    rotate: 0.6deg;
+  }
+}
+
+@keyframes sound-wave {
+  0% {
+    opacity: 0;
+    scale: 0.75;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    scale: 1.9;
+  }
+}
+
+@keyframes hero-zoom {
+  to {
+    scale: 1.12;
+  }
+}
+
+@keyframes hero-copy-out {
+  to {
+    opacity: 0;
+    translate: 0 -3rem;
+    filter: blur(8px);
+  }
+}
+
+/* Боковые панели (меню, фильтры) на нативном <dialog>: выезд и затемнение фона. */
+.drawer {
+  transition:
+    translate 0.42s var(--ease-out),
+    overlay 0.42s allow-discrete,
+    display 0.42s allow-discrete;
+}
+
+.drawer-left {
+  translate: -100% 0;
+}
+
+.drawer-right {
+  --drawer-from: 100%;
+  translate: 100% 0;
+}
+
+.drawer[open] {
+  translate: 0 0;
+}
+
+@starting-style {
+  .drawer[open] {
+    translate: var(--drawer-from, -100%) 0;
+  }
+}
+
+.drawer::backdrop {
+  background: var(--backdrop);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition:
+    opacity 0.42s var(--ease-out),
+    overlay 0.42s allow-discrete,
+    display 0.42s allow-discrete;
+}
+
+.drawer[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .drawer[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* Растворяет левый и верхний край фото, когда снимок лежит поверх плитки. */
+.photo-fade {
+  mask-image:
+    linear-gradient(to right, transparent, #000 30%),
+    linear-gradient(to bottom, transparent, #000 25%);
+  mask-composite: intersect;
+}
+
+/* Растворяет верх hero-фото в градиенте неба контейнера. */
+.sky-fade {
+  mask-image: linear-gradient(to bottom, transparent, #000 28%);
+}
+
+/* Плавное раскрытие ответов FAQ. */
+.faq-item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 0.4s var(--ease-out),
+    content-visibility 0.4s allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
+/* Скелетоны: мягкий блик вместо пульсации. */
+.skeleton {
+  background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgb(255 255 255 / 0.45) 50%,
+      transparent 80%
+    )
+    var(--surface-muted);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+[data-theme="dark"] .skeleton {
+  background-image: linear-gradient(100deg, transparent 20%, rgb(255 255 255 / 0.06) 50%, transparent 80%);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+/* Переходы между страницами (React <ViewTransition>). */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(.morph) {
+  animation-duration: 0.45s;
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+
+::view-transition-old(.fade-out) {
+  animation: 0.16s ease-out both vt-fade reverse;
+}
+
+::view-transition-new(.slide-up) {
+  animation:
+    0.26s ease-out 0.12s both vt-fade,
+    0.45s var(--ease-out) both vt-rise;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@keyframes via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-rise {
+  from {
+    transform: translateY(14px);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+  }
+  55% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-pop {
+  animation: pop 0.45s var(--ease-out);
+}
+
+@keyframes theme-swap {
+  from {
+    opacity: 0;
+    transform: rotate(-120deg) scale(0.4);
+  }
+}
+
+.animate-theme-swap {
+  animation: theme-swap 0.5s var(--ease-out);
+}
+
+@keyframes in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.animate-in-up {
+  animation: in-up 0.4s var(--ease-out) both;
+}
+
+/* Вход первого экрана на CSS: работает до гидрации и не задерживает LCP. */
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+}
+
+.animate-enter {
+  animation: enter 0.8s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* Появление при прокрутке: прогресс привязан к входу элемента во вьюпорт. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--i, 0) * 6%) entry calc(70% + var(--i, 0) * 6%);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .float-tag,
+  .hero-levitate,
+  .hero-photo,
+  .hero-copy {
+    animation: none !important;
+  }
+
+  .hero-ring {
+    display: none;
+  }
+
+  .parallax {
+    transform: none;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
