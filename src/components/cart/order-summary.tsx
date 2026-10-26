@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
-import { plural } from "@/lib/i18n/format";
-import { formatMoney } from "@/lib/money";
+import { plural, t } from "@/lib/i18n/format";
+import { formatMoney, formatUsd, formatUsdRate, uzsToUsd } from "@/lib/money";
 
 interface OrderSummaryProps {
   locale: Locale;
@@ -11,9 +11,11 @@ interface OrderSummaryProps {
   subtotal: number;
   children?: ReactNode;
   pending?: boolean;
+  /** Курс USD → UZS: показываем ориентир в долларах, списание — в сумах. */
+  usdRate?: number | null;
 }
 
-export function OrderSummary({ locale, dict, itemCount, subtotal, children, pending }: OrderSummaryProps) {
+export function OrderSummary({ locale, dict, itemCount, subtotal, children, pending, usdRate }: OrderSummaryProps) {
   return (
     <section
       aria-labelledby="order-summary"
@@ -40,6 +42,11 @@ export function OrderSummary({ locale, dict, itemCount, subtotal, children, pend
             {formatMoney(subtotal, locale)}
           </dd>
         </div>
+        {usdRate && (
+          <p className="-mt-1 text-right text-[13px] text-text-muted tabular-nums">
+            {t(dict.cart.usdApprox, { usd: formatUsd(uzsToUsd(subtotal, usdRate), locale), rate: formatUsdRate(usdRate, locale) })}
+          </p>
+        )}
       </dl>
       {children}
     </section>

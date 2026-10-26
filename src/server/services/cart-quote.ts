@@ -1,7 +1,6 @@
 import type { CartItemInput, CartQuote, QuoteLine } from "@/features/cart/schema";
 import { lineTotal } from "@/lib/money";
 import { getProductsByIds } from "@/server/repositories/catalog";
-import { demoCategories } from "@/server/demo/catalog-data";
 
 // Цена и остаток всегда берутся из каталога; данные браузера используются только как список id и количеств.
 export async function quoteCart(items: CartItemInput[]): Promise<CartQuote> {
@@ -16,9 +15,7 @@ export async function quoteCart(items: CartItemInput[]): Promise<CartQuote> {
   const lines: QuoteLine[] = products.map((product) => {
     const requestedQuantity = requested.get(product.id) ?? 0;
     const quantity = Math.min(requestedQuantity, product.stockQuantity);
-    const icon =
-      demoCategories.find((category) => product.categoryIds.includes(category.id))?.icon ??
-      "appliance";
+    const icon = product.category?.icon ?? "appliance";
 
     return {
       productId: product.id,

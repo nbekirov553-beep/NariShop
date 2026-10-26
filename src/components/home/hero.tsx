@@ -8,38 +8,54 @@ import { localePath, type Locale } from "@/lib/i18n/config";
 import { formatMoney } from "@/lib/money";
 import type { Product } from "@/server/repositories/catalog";
 import { FloatingTags } from "./floating-tags";
+import { HeroShowcase, type ShowcaseSlide } from "./hero-showcase";
 import { HeroStage } from "./hero-stage";
+
+/** Товар, снятый на hero-фото: если он первый в списке, его слайд — сама фото-сцена. */
+export const HERO_SCENE_SLUG = "sonora-studio";
 
 interface HeroProps {
   locale: Locale;
   dict: Dictionary;
-  /** Товар, снятый на hero-фото: карточка «В кадре» ведёт на его страницу. */
-  spotlight: Product | null;
+  /** Товары, которые листаются в кадре; карточка «В кадре» ведёт на страницу текущего. */
+  products: Product[];
 }
 
-export function Hero({ locale, dict, spotlight }: HeroProps) {
-  const spotlightImage = spotlight?.images.find((image) => image.isPrimary) ?? spotlight?.images[0];
+export function Hero({ locale, dict, products }: HeroProps) {
+  const slides: ShowcaseSlide[] = products.map((product) => ({
+    href: localePath(locale, `/product/${product.slug}`),
+    name: product.name[locale],
+    price: formatMoney(product.priceUzs, locale),
+    imageUrl: (product.images.find((image) => image.isPrimary) ?? product.images[0])?.url ?? null,
+  }));
+  const home = dict.home;
+  const labels = {
+    spotlight: home.heroSpotlight,
+    carousel: home.heroCarousel,
+    prev: home.heroPrev,
+    next: home.heroNext,
+    goTo: home.heroGoTo,
+    pause: home.heroPause,
+    play: home.heroPlay,
+    counter: home.heroCounter,
+  };
+  const scene =
+    products.length === 0 || products[0]?.slug === HERO_SCENE_SLUG ? (
+      <Image
+        src={heroImage}
+        alt=""
+        fill
+        placeholder="blur"
+        loading="eager"
+        fetchPriority="high"
+        sizes="(min-width: 1024px) 100vw, (min-width: 768px) 140vw, 220vw"
+        className="object-cover"
+      />
+    ) : null;
 
   return (
     <HeroStage labelledBy="hero-title" className="sky-frame hero-frame">
-      <div aria-hidden className="hero-photo parallax z-0" style={{ "--depth": "-14px" } as CSSProperties}>
-        <div className="hero-levitate">
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            placeholder="blur"
-            loading="eager"
-            fetchPriority="high"
-            sizes="(min-width: 1024px) 100vw, (min-width: 768px) 140vw, 220vw"
-            className="object-cover"
-          />
-          {[0, 1, 2].map((index) => (
-            <span key={index} className="hero-ring" style={{ "--i": index } as CSSProperties} />
-          ))}
-        </div>
-      </div>
-
+      <HeroShowcase slides={slides} scene={scene} labels={labels}>
       <FloatingTags labels={dict.home.tags} />
 
       <div
@@ -77,35 +93,7 @@ export function Hero({ locale, dict, spotlight }: HeroProps) {
         </div>
       </div>
 
-      {spotlight && (
-        <Link
-          href={localePath(locale, `/product/${spotlight.slug}`)}
-          className="animate-enter material material-regular absolute bottom-4 left-1/2 z-[3] flex max-w-[calc(100%-2rem)] -translate-x-1/2 items-center gap-3 rounded-[var(--radius-pill)] py-1.5 pl-1.5 pr-4 text-left text-text transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift sm:bottom-6"
-          style={{ "--i": 6 } as CSSProperties}
-        >
-          {spotlightImage && (
-            <span className="relative size-10 shrink-0 overflow-hidden rounded-full bg-tint-pink">
-              <Image
-                src={spotlightImage.url}
-                alt=""
-                fill
-                sizes="40px"
-                className="object-cover mix-blend-multiply"
-              />
-            </span>
-          )}
-          <span className="flex min-w-0 flex-col leading-tight">
-            <span className="text-[11px] font-bold uppercase tracking-[0.14em] opacity-70">
-              {dict.home.heroSpotlight}
-            </span>
-            <span className="truncate text-[13px] font-semibold sm:text-sm">
-              {spotlight.name[locale]}
-              <span className="hidden sm:inline"> · {formatMoney(spotlight.priceUzs, locale)}</span>
-            </span>
-          </span>
-          <ArrowUpRightIcon size={16} weight="bold" aria-hidden />
-        </Link>
-      )}
+      </HeroShowcase>
     </HeroStage>
   );
 }

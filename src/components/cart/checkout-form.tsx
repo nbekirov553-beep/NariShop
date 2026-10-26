@@ -57,7 +57,23 @@ function RadioCard({
   );
 }
 
-export function CheckoutForm() {
+export interface CheckoutDefaults {
+  name: string;
+  phone: string | null;
+  email: string | null;
+  city: string | null;
+  address: string | null;
+}
+
+export function CheckoutForm({
+  defaults,
+  onlinePayment = false,
+  usdRate = null,
+}: {
+  defaults?: CheckoutDefaults;
+  onlinePayment?: boolean;
+  usdRate?: number | null;
+}) {
   const { locale, dict } = useI18n();
   const { status, quote, lines, items, retry } = useCartQuote();
   const clear = useCart((state) => state.clear);
@@ -66,6 +82,7 @@ export function CheckoutForm() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<ErrorKey | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
   const [order, setOrder] = useState<CreatedOrder | null>(null);
   const idempotencyKey = useRef<string | null>(null);
   const errorSummaryRef = useRef<HTMLDivElement>(null);
@@ -83,9 +100,24 @@ export function CheckoutForm() {
           <InfoIcon size={18} weight="bold" aria-hidden className="mt-0.5 shrink-0" />
           {dict.checkout.successDemo}
         </p>
-        <Link href={localePath(locale, "/catalog")} className={buttonStyles()}>
-          {dict.checkout.toCatalog}
-        </Link>
+        <p className="text-sm text-text-muted">{dict.checkout.successAccount}</p>
+        <div className="flex flex-wrap gap-3">
+          <Link href={localePath(locale, "/catalog")} className={buttonStyles()}>
+            {dict.checkout.toCatalog}
+          </Link>
+          <Link href={localePath(locale, "/account")} className={buttonStyles({ variant: "secondary" })}>
+            {dict.checkout.toOrders}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (redirecting) {
+    return (
+      <div role="status" className="flex items-center gap-3 rounded-[var(--radius-card)] border border-border bg-surface p-8 text-[15px] font-medium">
+        <span aria-hidden className="size-5 animate-spin rounded-full border-2 border-border border-t-accent" />
+        {dict.checkout.redirectingToPayment}
       </div>
     );
   }
@@ -125,9 +157,17 @@ export function CheckoutForm() {
           idempotencyKey: idempotencyKey.current,
           items,
           checkout: { ...data, deliveryMethod: delivery, paymentMethod: payment },
+          locale,
         }),
       });
       const body = (await response.json()) as { data?: CreatedOrder; error?: { code: string } };
+      if (response.ok && body.data?.paymentUrl) {
+        // Статус оплаты подтвердит webhook; после оплаты Stripe вернёт на страницу результата.
+        setRedirecting(true);
+        clear();
+        window.location.assign(body.data.paymentUrl);
+        return;
+      }
       if (response.ok && body.data) {
         setOrder(body.data);
         clear();
@@ -137,7 +177,7 @@ export function CheckoutForm() {
       // Сервер отклонил заказ: следующая попытка будет новым заказом.
       idempotencyKey.current = null;
       const code = body.error?.code;
-      setFormError(code === "stock_changed" || code === "empty_cart" ? code : "generic");
+      setFormError(code === "stock_changed" || code === "empty_cart" || code === "payment_unavailable" ? code : "generic");
       if (code === "stock_changed") retry();
     } catch {
       // Сетевая ошибка: ключ сохраняется, повторная отправка не создаст дубль.
@@ -180,7 +220,15 @@ export function CheckoutForm() {
 
         <fieldset className="flex flex-col gap-4">
           <legend className="mb-4 font-display text-lg font-semibold">{dict.checkout.contact}</legend>
-          <TextField id="name" name="name" label={dict.checkout.name} autoComplete="name" required error={errorText("name")} />
+          <TextField
+            id="name"
+            name="name"
+            label={dict.checkout.name}
+            autoComplete="name"
+            defaultValue={defaults?.name}
+            required
+            error={errorText("name")}
+          />
           <div className="grid gap-4 sm:grid-cols-2">
             <TextField
               id="phone"
@@ -190,7 +238,7 @@ export function CheckoutForm() {
               label={dict.checkout.phone}
               hint={dict.checkout.phoneHint}
               autoComplete="tel"
-              defaultValue="+998 "
+              defaultValue={defaults?.phone ?? "+998 "}
               required
               error={errorText("phone")}
             />
@@ -201,6 +249,7 @@ export function CheckoutForm() {
               label={dict.checkout.email}
               hint={dict.checkout.emailHint}
               autoComplete="email"
+              defaultValue={defaults?.email ?? undefined}
               error={errorText("email")}
             />
           </div>
@@ -223,13 +272,21 @@ export function CheckoutForm() {
           </div>
           {delivery === "courier" ? (
             <div className="grid gap-4 sm:grid-cols-[1fr_2fr]">
-              <TextField id="city" name="city" label={dict.checkout.city} autoComplete="address-level2" error={errorText("city")} />
+              <TextField
+                id="city"
+                name="city"
+                label={dict.checkout.city}
+                autoComplete="address-level2"
+                defaultValue={defaults?.city ?? undefined}
+                error={errorText("city")}
+              />
               <TextField
                 id="address"
                 name="address"
                 label={dict.checkout.address}
                 hint={dict.checkout.addressHint}
                 autoComplete="street-address"
+                defaultValue={defaults?.address ?? undefined}
                 error={errorText("address")}
               />
             </div>
@@ -241,7 +298,9 @@ export function CheckoutForm() {
         <fieldset className="flex flex-col gap-4">
           <legend className="mb-4 font-display text-lg font-semibold">{dict.checkout.payment}</legend>
           <div className="grid gap-3 sm:grid-cols-2">
-            {paymentMethods.map((method) => (
+            {paymentMethods
+              .filter((method) => onlinePayment || method !== "card_online")
+              .map((method) => (
               <RadioCard
                 key={method}
                 name="paymentMethod"
@@ -253,7 +312,9 @@ export function CheckoutForm() {
               </RadioCard>
             ))}
           </div>
-          <p className="text-sm text-text-muted">{dict.checkout.paymentNote}</p>
+          <p className="text-sm text-text-muted">
+            {payment === "card_online" ? dict.checkout.cardOnlineNote : dict.checkout.paymentNote}
+          </p>
         </fieldset>
 
         <TextAreaField
@@ -267,7 +328,7 @@ export function CheckoutForm() {
 
         <div className="flex flex-wrap items-center gap-3">
           <Button type="submit" size="lg" disabled={submitting || blocked || status === "loading"}>
-            {submitting ? dict.checkout.submitting : dict.checkout.submit}
+            {submitting ? dict.checkout.submitting : payment === "card_online" ? dict.checkout.submitPay : dict.checkout.submit}
           </Button>
           <Link href={localePath(locale, "/cart")} className={buttonStyles({ variant: "ghost" })}>
             {dict.checkout.backToCart}
@@ -281,6 +342,7 @@ export function CheckoutForm() {
           dict={dict}
           itemCount={quote.itemCount}
           subtotal={quote.subtotalUzs}
+          usdRate={usdRate}
           pending={status === "loading"}
         >
           <ul className="flex flex-col gap-2 border-t border-border pt-4">

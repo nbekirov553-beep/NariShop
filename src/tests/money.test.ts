@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { discountPercent, formatMoney, lineTotal } from "@/lib/money";
+import {
+  discountPercent,
+  formatMoney,
+  formatUsd,
+  formatUsdRate,
+  lineTotal,
+  parseUsdRate,
+  usdToUzs,
+  uzsToUsd,
+} from "@/lib/money";
 
 describe("formatMoney", () => {
   it("groups digits per locale", () => {
@@ -30,5 +39,34 @@ describe("discountPercent", () => {
 describe("lineTotal", () => {
   it("multiplies integer price by quantity", () => {
     expect(lineTotal(690_000, 3)).toBe(2_070_000);
+  });
+});
+
+describe("курс сум ↔ доллар", () => {
+  it("разбирает USD_UZS_RATE и отклоняет пустой или неверный курс", () => {
+    expect(parseUsdRate("12650")).toBe(12650);
+    expect(parseUsdRate(" 12 650,5 ")).toBe(12650.5);
+    expect(parseUsdRate("12_650")).toBe(12650);
+    expect(parseUsdRate("")).toBeNull();
+    expect(parseUsdRate(undefined)).toBeNull();
+    expect(parseUsdRate("0")).toBeNull();
+    expect(parseUsdRate("-1")).toBeNull();
+    expect(parseUsdRate("abc")).toBeNull();
+  });
+
+  it("переводит сумы в центы и обратно с округлением", () => {
+    expect(uzsToUsd(1_590_000, 12_650)).toBe(12_569);
+    expect(usdToUzs(12_569, 12_650)).toBe(1_589_979);
+    expect(usdToUzs(100, 12_650)).toBe(12_650);
+    expect(uzsToUsd(12_650, 12_650)).toBe(100);
+    expect(uzsToUsd(0, 12_650)).toBe(0);
+  });
+
+  it("форматирует доллары и курс для каждого языка", () => {
+    expect(formatUsd(12_569, "en")).toBe("$125.69");
+    expect(formatUsd(123_456_705, "en")).toBe("$1,234,567.05");
+    expect(formatUsd(12_569, "ru")).toBe("125,69 $");
+    expect(formatUsdRate(12_650, "ru")).toBe("1 $ = 12 650 сум");
+    expect(formatUsdRate(12_650.4, "en")).toBe("1 $ = 12,650 UZS");
   });
 });

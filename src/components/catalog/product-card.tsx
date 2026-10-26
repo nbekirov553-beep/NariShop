@@ -4,18 +4,13 @@ import { AddToCartCompact } from "@/components/product/add-to-cart";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import type { Product } from "@/server/repositories/catalog";
-import { demoCategories } from "@/server/demo/catalog-data";
 import { PriceBlock } from "./price-block";
 import { ProductVisual } from "./product-visual";
 import { StockStatus } from "./stock-status";
 import { toneFor } from "./tone";
 
-function productCategory(product: Product) {
-  return demoCategories.find((category) => product.categoryIds.includes(category.id));
-}
-
 export function productIcon(product: Product): string {
-  return productCategory(product)?.icon ?? "appliance";
+  return product.category?.icon ?? "appliance";
 }
 
 export function productTransitionName(product: Product): string {
@@ -34,8 +29,8 @@ interface ProductCardProps {
 export function ProductCard({ product, locale, dict, morph = false, eager = false }: ProductCardProps) {
   const name = product.name[locale];
   const primaryImage = product.images.find((image) => image.isPrimary) ?? product.images[0];
-  const category = productCategory(product);
-  const icon = category?.icon ?? "appliance";
+  const category = product.category;
+  const icon = productIcon(product);
 
   return (
     <article

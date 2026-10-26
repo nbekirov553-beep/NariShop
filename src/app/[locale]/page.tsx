@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CategoryIcon } from "@/components/catalog/category-icon";
 import { ProductCard, ProductGrid } from "@/components/catalog/product-card";
 import { toneFor } from "@/components/catalog/tone";
-import { Hero } from "@/components/home/hero";
+import { Hero, HERO_SCENE_SLUG } from "@/components/home/hero";
 import { Reveal } from "@/components/motion/reveal";
 import { Faq } from "@/components/ui/faq";
 import { localePath } from "@/lib/i18n/config";
@@ -18,18 +18,26 @@ import {
   listCategories,
 } from "@/server/repositories/catalog";
 
-const HERO_PRODUCT_SLUG = "sonora-studio";
+// Первый — товар, снятый на hero-фото; остальные листаются в кадре по одному из каждой категории.
+const HERO_PRODUCT_SLUGS = [
+  HERO_SCENE_SLUG,
+  "lumo-s12-pro-256gb",
+  "orion-book-16-pro",
+  "orion-oled-65",
+  "sonora-box-mini",
+  "kumush-brew",
+];
 
 const advantageTones = ["bg-pastel-pink", "bg-pastel-lavender", "bg-pastel-butter"];
 
 export default async function HomePage() {
-  const [{ locale, dict }, categories, counts, deals, popular, spotlight] = await Promise.all([
+  const [{ locale, dict }, categories, counts, deals, popular, heroProducts] = await Promise.all([
     getI18n(),
     listCategories(),
     countProductsByCategory(),
     getDealProducts(8),
     getPopularProducts(6),
-    getProductBySlug(HERO_PRODUCT_SLUG),
+    Promise.all(HERO_PRODUCT_SLUGS.map((slug) => getProductBySlug(slug))),
   ]);
 
   const catalogHref = localePath(locale, "/catalog");
@@ -57,7 +65,7 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <Hero locale={locale} dict={dict} spotlight={spotlight} />
+      <Hero locale={locale} dict={dict} products={heroProducts.filter((product) => product !== null)} />
 
       <div className="sheet sheet-sky flex flex-col gap-20 lg:gap-28">
         <section aria-labelledby="home-featured" className="flex flex-col gap-8 lg:gap-12">

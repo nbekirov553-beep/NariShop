@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { CategoryIcon } from "@/components/catalog/category-icon";
 import { getI18n } from "@/lib/i18n/dictionaries";
 import { localePath } from "@/lib/i18n/config";
 import { listCategories } from "@/server/repositories/catalog";
+import { AccountSlot } from "./account-slot";
 import { CartLink } from "./cart-link";
 import { Logo } from "./logo";
 import { MobileMenu } from "./mobile-menu";
@@ -61,6 +63,9 @@ export async function Header() {
             className="hidden transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:flex md:w-64 xl:w-72 xl:focus-within:w-80"
           />
           <ThemeToggle />
+          <Suspense fallback={<span aria-hidden className="size-11 shrink-0" />}>
+            <AccountSlot />
+          </Suspense>
           <CartLink />
         </div>
 

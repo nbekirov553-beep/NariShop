@@ -326,7 +326,7 @@
 
   .hero-photo {
     --hp-top: 0.58;
-    --hp-lift: 4.75rem;
+    --hp-lift: 6.25rem;
     --hp-max: 257cqw;
     position: absolute;
     left: 50%;
@@ -344,7 +344,7 @@
 
     .hero-photo {
       --hp-top: 0.5;
-      --hp-lift: 4.5rem;
+      --hp-lift: 6.5rem;
       --hp-max: 164cqw;
     }
   }
@@ -352,7 +352,7 @@
   @media (width >= 64rem) {
     .hero-photo {
       --hp-top: 0.47;
-      --hp-lift: 4.25rem;
+      --hp-lift: 6.25rem;
       --hp-max: 120cqw;
     }
   }
@@ -381,6 +381,57 @@
     opacity: 0;
     animation: sound-wave 4.8s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
     animation-delay: calc(var(--i, 0) * 1.6s);
+    transition: top 0.9s var(--ease-out);
+  }
+
+  /* Слайды «В кадре»: сцена с наушниками и фото товаров сменяют друг друга на одном месте. */
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    scale: 0.94;
+    translate: 0 1.5%;
+    transition:
+      opacity 0.7s var(--ease-out),
+      scale 1s var(--ease-out),
+      translate 1s var(--ease-out);
+  }
+
+  .hero-slide.is-active {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0;
+  }
+
+  /* Фото товара встаёт туда же, где на снимке наушники; серый фон студии растворяется в небе. */
+  .hero-product {
+    position: absolute;
+    left: 49.5%;
+    top: 70%;
+    width: 26%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border-radius: 50%;
+    overflow: hidden;
+    mask-image: radial-gradient(closest-side, #000 64%, transparent);
+  }
+
+  .hero-levitate[data-kind="product"] .hero-ring {
+    top: 70%;
+  }
+
+  @keyframes hero-progress {
+    from {
+      scale: 0 1;
+    }
+  }
+
+  .hero-progress {
+    transform-origin: left;
+  }
+
+  .hero-progress.is-running {
+    animation: hero-progress 6s linear both;
   }
 
   /* Слой, который смещается за курсором: --px/--py ставит HeroStage, --depth — глубина слоя. */
@@ -767,6 +818,11 @@
 
   .hero-ring {
     display: none;
+  }
+
+  .hero-slide {
+    scale: 1;
+    translate: 0 0;
   }
 
   .parallax {
