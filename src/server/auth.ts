@@ -14,7 +14,10 @@ declare module "next-auth" {
   }
 }
 
-export const isGoogleConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
+const googleClientId = process.env.GOOGLE_CLIENT_ID || process.env.AUTH_GOOGLE_ID;
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET || process.env.AUTH_GOOGLE_SECRET;
+
+export const isGoogleConfigured = Boolean(googleClientId && googleClientSecret);
 
 // Сессии хранятся в БД (таблица sessions), cookie содержит только случайный токен.
 // Адрес возврата после Google ограничен: Auth.js пускает только URL своего же origin,
@@ -28,8 +31,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth(async () => ({
   }),
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: googleClientId,
+      clientSecret: googleClientSecret,
     }),
   ],
   session: { strategy: "database" },
