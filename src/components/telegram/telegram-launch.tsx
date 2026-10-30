@@ -57,7 +57,14 @@ export function TelegramLaunch() {
 
   return (
     <>
-      <Script id={TELEGRAM_SCRIPT_ID} src={TELEGRAM_SCRIPT_SRC} onReady={start} onError={() => setStatus("outside")} />
+      {/* Скрипт может уже грузиться из TelegramBridge: тогда next/script вызывает только onLoad, без onReady. */}
+      <Script
+        id={TELEGRAM_SCRIPT_ID}
+        src={TELEGRAM_SCRIPT_SRC}
+        onLoad={start}
+        onReady={start}
+        onError={() => setStatus("outside")}
+      />
       {status === "loading" && (
         <p role="status" className="flex items-center gap-2 text-[15px] font-medium text-text-muted">
           <TelegramLogoIcon size={20} weight="fill" aria-hidden className="animate-pulse text-accent" />

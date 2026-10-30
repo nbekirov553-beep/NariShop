@@ -36,5 +36,6 @@ export function TelegramBridge() {
   }, [app, pathname, router]);
 
   if (!inTelegram) return null;
-  return <Script id={TELEGRAM_SCRIPT_ID} src={TELEGRAM_SCRIPT_SRC} onReady={() => setApp(getTelegramWebApp())} />;
+  const connect = () => setApp(getTelegramWebApp());
+  return <Script id={TELEGRAM_SCRIPT_ID} src={TELEGRAM_SCRIPT_SRC} onLoad={connect} onReady={connect} />;
 }

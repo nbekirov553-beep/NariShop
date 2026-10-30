@@ -6,8 +6,10 @@ const TELEGRAM_SCRIPT = "https://telegram.org/js/telegram-web-app.js";
 
 /** Подменяет скрипт Telegram: WebApp с init data, подписанной тестовым токеном бота. */
 async function openAsMiniApp(page: Page, initData: string) {
-  await page.route(TELEGRAM_SCRIPT, (route) =>
-    route.fulfill({
+  await page.route(TELEGRAM_SCRIPT, async (route) => {
+    // Как в настоящем Telegram: скрипт грузится не мгновенно, его одновременно ждут экран /tg и TelegramBridge.
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    await route.fulfill({
       contentType: "text/javascript",
       body: `
         window.__tg = { ready: 0, expanded: 0, back: "hidden" };
@@ -22,9 +24,9 @@ async function openAsMiniApp(page: Page, initData: string) {
             onClick() {}, offClick() {},
           },
         } };`,
-    }),
-  );
-  await page.goto("/ru/tg");
+    });
+  });
+  await page.goto(`/ru/tg#tgWebAppData=${encodeURIComponent(initData)}&tgWebAppVersion=8.0`);
 }
 
 const telegramState = (page: Page) => page.evaluate(() => (window as unknown as { __tg: Record<string, unknown> }).__tg);
