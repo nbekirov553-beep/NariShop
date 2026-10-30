@@ -3,6 +3,9 @@ import { defineConfig, devices } from "@playwright/test";
 const port = Number(process.env.E2E_PORT ?? 3100);
 const baseURL = `http://localhost:${port}`;
 
+/** Токен «бота» только для E2E: им тесты подписывают init data Telegram Mini App. */
+export const E2E_TELEGRAM_BOT_TOKEN = "123456:e2e-only-telegram-bot-token";
+
 // Браузер — установленный Google Chrome (channel: "chrome"): на CI-раннерах GitHub он уже есть,
 // локально не нужно скачивать отдельный Chromium.
 // Сервер — production-сборка на in-memory БД; вход без Google включает ENABLE_TEST_LOGIN.
@@ -36,6 +39,7 @@ export default defineConfig({
     env: {
       ENABLE_TEST_LOGIN: "1",
       DATABASE_URL: "",
+      TELEGRAM_BOT_TOKEN: E2E_TELEGRAM_BOT_TOKEN,
       AUTH_SECRET: process.env.AUTH_SECRET ?? "e2e-only-secret-not-for-production-use-000000",
     },
   },

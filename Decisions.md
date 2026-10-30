@@ -27,6 +27,7 @@
 | ✅ Номер заказа | `NS-100001` и далее (последовательность в БД) | `order_number_seq` |
 | ✅ Хостинг | Vercel, адрес `https://nari-shop-tau.vercel.app`; webhook Stripe — `/api/v1/webhooks/stripe` | переменные окружения — в настройках проекта Vercel |
 | ✅ Онлайн-провайдер | только Stripe (ЮKassa исключена владельцем); сумма в UZS, в Stripe — в тийинах (× 100) | `src/server/payments/stripe.ts` |
+| ✅ Telegram Mini App | Тот же сайт внутри Telegram, вход по init data: подпись проверяет сервер токеном бота, данные старше часа не принимаются; Telegram-аккаунт привязывается к уже вошедшему пользователю или создаёт покупателя; cookie сессии из Mini App — `SameSite=None; Secure` (Telegram Web открывает сайт во фрейме) | `src/server/telegram.ts`, `src/server/services/telegram.ts`, `/api/v1/telegram/session`, `/{locale}/tg` |
 | ✅ Курс доллара | `USD_UZS_RATE` (сумов за 1 $) — только справочно: «≈ $X» в оформлении, на странице Stripe и в админке; списание всегда в сумах, курс на момент оплаты пишется в метаданные платежа Stripe | `src/lib/money.ts`, `src/server/fx.ts` |
 | ✅ Профиль покупателя | имя, фамилия, телефон, дата рождения, город и адрес; контакты и адрес подставляются в оформление заказа | `src/features/profile/schema.ts`, `src/server/services/users.ts` |
 | ✅ Фото профиля | обрезается в браузере до 256×256 и хранится в БД (таблица `user_avatars`, ~20 КБ) до появления S3; JPG/PNG/WebP проверяются по сигнатуре файла | `/api/v1/avatars/[userId]` |

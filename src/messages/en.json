@@ -371,6 +371,16 @@
     "profile": "Profile",
     "admin": "Admin panel"
   },
+  "telegram": {
+    "title": "NariShop in Telegram",
+    "connecting": "Signing in with Telegram…",
+    "outsideTitle": "Open the store in Telegram",
+    "outsideText": "This page launches from the store's Telegram bot. In a browser, sign in with Google.",
+    "toLogin": "Continue with Google",
+    "toShop": "Go to the store",
+    "error": "Couldn't sign in with Telegram. Close the app and open it again.",
+    "retry": "Try again"
+  },
   "account": {
     "title": "My account",
     "profile": "Profile",
@@ -561,7 +571,9 @@
         "category.updated": "Category updated",
         "user.updated": "Profile updated",
         "user.avatar_updated": "Profile photo changed",
-        "user.avatar_removed": "Profile photo removed"
+        "user.avatar_removed": "Profile photo removed",
+        "user.telegram_registered": "Signed up via Telegram",
+        "user.telegram_linked": "Telegram linked to the account"
       }
     },
     "errors": {

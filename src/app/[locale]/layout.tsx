@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
+import { Suspense } from "react";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { themeInitScript } from "@/components/layout/theme-switcher";
+import { TelegramBridge } from "@/components/telegram/telegram-bridge";
 import { brand } from "@/lib/brand";
 import { I18nProvider } from "@/lib/i18n/client";
 import { locales } from "@/lib/i18n/config";
@@ -67,6 +69,9 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
             {children}
           </main>
           <Footer />
+          <Suspense fallback={null}>
+            <TelegramBridge />
+          </Suspense>
         </I18nProvider>
       </body>
     </html>

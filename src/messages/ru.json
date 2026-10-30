@@ -371,6 +371,16 @@
     "profile": "Профиль",
     "admin": "Админ-панель"
   },
+  "telegram": {
+    "title": "NariShop в Telegram",
+    "connecting": "Входим через Telegram…",
+    "outsideTitle": "Откройте магазин в Telegram",
+    "outsideText": "Эта страница запускается из Telegram-бота магазина. В браузере войдите через Google.",
+    "toLogin": "Войти через Google",
+    "toShop": "Перейти в магазин",
+    "error": "Не удалось войти через Telegram. Закройте приложение и откройте его снова.",
+    "retry": "Повторить"
+  },
   "account": {
     "title": "Личный кабинет",
     "profile": "Профиль",
@@ -561,7 +571,9 @@
         "category.updated": "Категория изменена",
         "user.updated": "Профиль изменён",
         "user.avatar_updated": "Фото профиля изменено",
-        "user.avatar_removed": "Фото профиля удалено"
+        "user.avatar_removed": "Фото профиля удалено",
+        "user.telegram_registered": "Регистрация через Telegram",
+        "user.telegram_linked": "Telegram привязан к аккаунту"
       }
     },
     "errors": {

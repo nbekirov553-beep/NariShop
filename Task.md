@@ -108,7 +108,7 @@
 ## Этап 6. Качество и запуск — 🟡 1 из 4
 
 - [ ] 🟡 **6.1. T-060 (P0)** Unit, integration и E2E-тесты
-  - Сделано: 58 тестов Vitest (+ права, переходы статусов, возврат остатка, свои заказы, CRUD каталога, журнал, профиль и фото, оплата Stripe и webhook, курс сум ↔ доллар); 27 E2E-сценариев Playwright (поиск → товар → корзина → заказ → кабинет, админка, 320 px, клавиатура); `npm run test:e2e`; workflow `.github/workflows/ci.yml` (lint, типы, unit, build, E2E)
+  - Сделано: 67 тестов Vitest (+ права, переходы статусов, возврат остатка, свои заказы, CRUD каталога, журнал, профиль и фото, оплата Stripe и webhook, курс сум ↔ доллар, Telegram init data); 30 E2E-сценариев Playwright (поиск → товар → корзина → заказ → кабинет, админка, Telegram Mini App, 320 px, клавиатура); `npm run test:e2e`; workflow `.github/workflows/ci.yml` (lint, типы, unit, build, E2E)
   - Осталось: отправить изменения на GitHub и убедиться, что CI зелёный
   - Готово, когда: CI запускает критичные тесты
 - [x] ✅ **6.2. T-061 (P0)** Проверить адаптивность и доступность
@@ -116,7 +116,8 @@
   - Готово, когда: нет критичных проблем на 320–1440 px, работает клавиатура
 - [ ] 🟡 **6.3. T-062 (P0)** Настроить staging/production, HTTPS, логи и backups
   - Сделано: сайт развёрнут на Vercel с HTTPS — `https://nari-shop-tau.vercel.app`; `AUTH_SECRET` и Google-ключи в Vercel; база Neon подключена (`us-east-1`), миграции `0000–0003` и demo-каталог применены (`db:migrate`, `db:seed`), локальный сервер работает на Neon
-  - Осталось: Redeploy на Vercel и проверка входа; `ADMIN_EMAILS`, Stripe, `USD_UZS_RATE`, `APP_BASE_URL` в Vercel; redirect URI `localhost` и Vercel в клиенте Google; preview/staging-ветка, логи, проверка backup
+  - Вход через Google на Vercel работает (redirect URI `localhost` и Vercel в клиенте Google)
+  - Осталось: `ADMIN_EMAILS`, Stripe, `USD_UZS_RATE`, `APP_BASE_URL`, `TELEGRAM_BOT_TOKEN` в Vercel; preview/staging-ветка, логи, проверка backup
   - Готово, когда: повторяемый деплой и проверенное восстановление
 - [ ] 🟡 **6.4. T-063 (P0)** Подготовить страницы доставки, оплаты, гарантии, контактов и privacy
   - Сделано: страницы и черновики текстов (`/info/*`)
@@ -131,7 +132,9 @@
 - [x] ✅ **7.2. T-071 (P2)** Подключить Stripe в тестовом режиме
   - Сделано: способ «Картой онлайн» (`card_online`) в оформлении; заказ резервирует товар, после коммита создаётся Stripe Checkout Session в UZS (ключ идемпотентности `checkout:<UUID заказа>`, срок 1 час; справочно «≈ $X» по курсу `USD_UZS_RATE`), покупатель уходит на страницу Stripe и возвращается на `/{locale}/checkout/result` (статус из БД, не из редиректа; «Вернуться к оплате» для владельца); webhook `POST /api/v1/webhooks/stripe` проверяет подпись и обрабатывает `checkout.session.completed`, `async_payment_succeeded/failed`, `expired`, `charge.refunded` — отказ/истечение отменяют заказ и возвращают товар, повтор события ничего не меняет, всё пишется в журнал; если Stripe недоступен — заказ отменяется; 9 unit-тестов с подписанными событиями; проверено реальной тестовой оплатой картой 4242 (NS-100001 → «Заказ оплачен»)
   - Готово, когда: успех/отказ/отмена/повтор webhook протестированы
-- [ ] ⬜ **7.3. T-072 (P2)** Подготовить Telegram Mini App
+- [ ] 🟡 **7.3. T-072 (P2)** Подготовить Telegram Mini App
+  - Сделано: экран запуска `/{locale}/tg`; `POST /api/v1/telegram/session` проверяет подпись init data токеном бота (HMAC-SHA256, сравнение за постоянное время) и срок — не старше часа; вход создаёт покупателя или привязывает Telegram к уже вошедшему аккаунту (`accounts.provider = telegram`), ставит cookie сессии Auth.js (`SameSite=None; Secure` для Telegram Web); язык магазина — из Telegram; системная кнопка «Назад»; вне Telegram — предложение войти через Google; 9 unit-тестов (подпись, подмена, чужой токен, просрочка, привязка) и 3 E2E
+  - Осталось: создать бота в @BotFather, вписать `TELEGRAM_BOT_TOKEN` в Vercel, указать Menu Button URL `https://nari-shop-tau.vercel.app/ru/tg` и проверить запуск в Telegram
   - Готово, когда: Telegram init data проверяется сервером
 - [ ] ⬜ **7.4. T-073 (P2)** Создать Expo-клиент
   - Готово, когда: мобильный клиент использует тот же API
@@ -140,7 +143,7 @@
 
 ## Ближайшие шаги
 
-1. Выйти и войти заново через Google, открыть «Админ-панель» в меню аккаунта (5.1); на Vercel добавить `ADMIN_EMAILS=nbekirov553@gmail.com`.
+1. Создать бота в @BotFather, вписать `TELEGRAM_BOT_TOKEN` в `.env.local` и Vercel, Menu Button → `https://nari-shop-tau.vercel.app/ru/tg`, проверить вход в Telegram (7.3).
 2. Отправить изменения на GitHub и проверить, что workflow CI зелёный (6.1).
 3. Сделать Redeploy на Vercel, чтобы он подхватил `DATABASE_URL` от Neon, и проверить вход через Google (6.3).
 4. Выбрать почтовый сервис (Resend и т. п.) для email-входа и смены пароля (4.1, 4.4).
@@ -183,6 +186,8 @@
 | 2026-10-26 | 6.3 | Vercel: вход падал с `MissingSecret` — владелец добавил `AUTH_SECRET` и сделал Redeploy; `/api/auth/providers` отвечает 200 |
 | 2026-10-30 | 5.1 | В `ADMIN_EMAILS` исправлена почта владельца (`nbekirov553@gmail.com` вместо `nbekirov@gmail.com`) — роль admin выдаётся при следующем входе |
 | 2026-10-30 | 6.3 | Подключена база Neon: миграции и demo-каталог (6 категорий, 18 товаров) применены; `scripts/db.ts` исправлен (top-level await не работал в CJS); локальный сервер переведён на Neon |
+| 2026-10-30 | 5.1, 6.3 | Вход через Google работает локально и на Vercel (исправлены `AUTH_GOOGLE_ID` и redirect URI); владелец открыл админ-панель с ролью admin |
+| 2026-10-30 | 7.3 | Telegram Mini App: экран `/{locale}/tg`, серверная проверка подписи и срока init data, вход/регистрация/привязка Telegram-аккаунта, кнопка «Назад»; 67 unit, 30 E2E, lint, типы, `next build` |
 
 ## Definition of Done
 - Критерии задачи проверены.

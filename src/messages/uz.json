@@ -371,6 +371,16 @@
     "profile": "Profil",
     "admin": "Admin panel"
   },
+  "telegram": {
+    "title": "NariShop Telegram’da",
+    "connecting": "Telegram orqali kirilmoqda…",
+    "outsideTitle": "Do‘konni Telegram’da oching",
+    "outsideText": "Bu sahifa do‘konning Telegram-botidan ochiladi. Brauzerda Google orqali kiring.",
+    "toLogin": "Google orqali kirish",
+    "toShop": "Do‘konga o‘tish",
+    "error": "Telegram orqali kirib bo‘lmadi. Ilovani yopib, qayta oching.",
+    "retry": "Qayta urinish"
+  },
   "account": {
     "title": "Shaxsiy kabinet",
     "profile": "Profil",
@@ -561,7 +571,9 @@
         "category.updated": "Kategoriya o‘zgartirildi",
         "user.updated": "Profil o‘zgartirildi",
         "user.avatar_updated": "Profil rasmi o‘zgartirildi",
-        "user.avatar_removed": "Profil rasmi o‘chirildi"
+        "user.avatar_removed": "Profil rasmi o‘chirildi",
+        "user.telegram_registered": "Telegram orqali ro‘yxatdan o‘tildi",
+        "user.telegram_linked": "Telegram akkauntga bog‘landi"
       }
     },
     "errors": {
